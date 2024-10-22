@@ -129,6 +129,31 @@
 ***Input File Streams***
 
 - `c++`的制表符包括`'\n`  换行符 ` \t'  制表符`  `' '`空白符
+- ```cpp
+  #include <iostream>
+  #include <fstream>
+  #include <string>
+  
+  int inputFileStreamExample() {
+      std::ifstream ifs("append.txt");
+      if (ifs.is_open()) {
+          std::string line;
+          std::getline(ifs, line);
+          std::cout << "Read from the file: " << line << '\n';
+  
+          std::string lineTwo;
+          std::getline(ifs, lineTwo);
+          std::cout << "Read from the file: " << lineTwo << '\n';
+          
+          ifs.close(); // Close the file stream
+      } else {
+          std::cout << "Failed to open the file.\n";
+      }
+      return 0;
+  }
+  
+  ```
+- 
 - 总结（主要要点）：
   1. 流是用于在程序中读取和写入数据的通用接口。
   2. 同一源/目标类型的输入流和输出流相辅相成！
