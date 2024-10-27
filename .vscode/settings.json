@@ -105,6 +105,8 @@
     "typeinfo": "cpp",
     "set": "cpp",
     "unordered_set": "cpp",
-    "fstream": "cpp"
-  }
+    "fstream": "cpp",
+    "cstring": "cpp"
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }

@@ -5,6 +5,10 @@
 > Polymorphism:多态
 >
 > instantiate:声明
+>
+> derived class:派生了
+>
+> inheritance:继承
 
 ## **1.Classes** 
 
@@ -112,3 +116,92 @@
 
 - 动态多态性：不同类型的对象可能需要相同的接口
 - 可扩展性：继承允许你通过创建具有特定属性的子类来扩展一个类。
+
+
+
+## **继承类型**
+
+>
+>
+>public:公有
+>
+>private:私有
+>
+>protected:保护
+
+| 类型       | 公有继承                    | 保护继承                     | 私有继承                     |
+|------------|----------------------------|------------------------------|------------------------------|
+| 示例       | `class B: public A {...}`   | `class B: protected A {...}` | `class B: private A {...}`   |
+| 公有成员   | 在派生类中为公有           | 在派生类中为保护            | 在派生类中为私有            |
+| 保护成员   | 在派生类中为保护           | 在派生类中为保护            | 在派生类中为私有            |
+| 私有成员   | 在派生类中不可访问         | 在派生类中不可访问          | 在派生类中不可访问          |
+
+如果直接是`class Student : public Person `和`class Employee :public Person `继承的话,`SectionLeader`的构造会被调用两次，需要让这个两个类是虚函数继承`class Student : public virtual Person `和`class Employee : public vitural Person `
+
+```cpp
+#include <iostream>
+#include <cstring>
+#include <cstdint>
+
+class Person {
+protected:
+    std::string name;
+
+public:
+    Person(const std::string& name) : name(name) {}
+    std::string getName() const {
+        return name;
+    }
+};
+
+class Student : public virtual Person {
+protected:
+    std::string idNumber;
+    std::string major;
+    std::string advisor;
+    uint16_t year;
+
+public:
+    Student(const std::string& name, /* other parameters */);
+    std::string getIdNumber() const;
+    std::string getMajor() const;
+    uint16_t getYear() const;
+    void setYear(uint16_t year);
+    void setMajor(const std::string& major);
+    std::string getAdvisor() const;
+    void setAdvisor(const std::string& advisor);
+};
+
+class Employee :public virtual Person{
+protected:
+    double salary;
+
+public:
+    Employee(const std::string &name){};
+    virtual std::string getRole() const = 0;
+    virtual double getSalary() const = 0;
+    virtual void setSalary() const = 0;
+    virtual ~Employee() = default;
+};
+
+class SectionLeader : public Person, public Employee {
+protected:
+    std::string section;
+    std::string course;
+    std::vector<std::string> students;
+
+public:
+    SectionLeader(const std::string& name, /* other parameters */);
+    std::string getSection() const;
+    std::string getCourse() const;
+    void addStudent(const std::string& student);
+    void removeStudent(const std::string& student);
+    std::vector<std::string> getStudents() const;
+    std::string getRole() const override;
+    double getSalary() const override;
+    void setSalary(double salary) override;
+    virtual ~SectionLeader() noexcept = default;
+};
+
+```
+
