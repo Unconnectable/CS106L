@@ -106,7 +106,8 @@
     "set": "cpp",
     "unordered_set": "cpp",
     "fstream": "cpp",
-    "cstring": "cpp"
+    "cstring": "cpp",
+    "map": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

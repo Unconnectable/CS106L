@@ -3,7 +3,7 @@
 ## Iterator Basics(迭代器基础)
 
 - ```cpp
-  容器接口:
+  //容器接口:
   containers.begin()
   containers.end()
   ```
@@ -49,6 +49,52 @@
 
 - ![749ce1e9e9de1821bcbd727bc500397d](F:\Tencent software\QQ\Chat_stored\Tencent Files\937623624\nt_qq\nt_data\Pic\2024-10\Ori\749ce1e9e9de1821bcbd727bc500397d.png)
 
+- 通过迭代器访问容器
+
+  - ```cpp
+    	//vector
+    	std::vector<int> vec = {1, 2, 3, 4, 5};
+        for (auto it = vec.begin(); it != vec.end(); ++it) {
+            *it += 1; // 可以修改元素
+        }
+        for (const auto &val : vec) {
+            std::cout << val << " "; // 输出: 2 3 4 5 6
+        }
+    	//deque
+        std::deque<int> deq = {1, 2, 3, 4, 5};
+        for (auto it = deq.begin(); it != deq.end(); ++it) {
+            *it *= 2; // 可以修改元素
+        }
+        for (const auto &val : deq) {
+            std::cout << val << " "; // 输出: 2 4 6 8 10
+        }
+    	//list
+        std::list<int> lst = {1, 2, 3, 4, 5};
+        for (auto it = lst.begin(); it != lst.end(); ++it) {
+            *it += 10; // 可以修改元素
+        }
+        for (const auto &val : lst) {
+            std::cout << val << " "; // 输出: 11 12 13 14 15
+        }
+    	//set
+        std::set<int> mySet = {1, 2, 3, 4, 5};
+        for (auto it = mySet.begin(); it != mySet.end(); ++it) {
+            std::cout << *it << " "; // 只读访问
+        }
+    	//map
+        std::map<int, std::string> myMap = {{1, "one"}, {2, "two"}, {3, "three"}};
+        for (auto it = myMap.begin(); it != myMap.end(); ++it) {
+            std::cout << it->first << ": " << it->second << "\n"; // 只读访问
+        }
+    	//unorderded_se
+        std::unordered_set<int> myUSet = {1, 2, 3, 4, 5};
+        for (auto it = myUSet.begin(); it != myUSet.end(); ++it) {
+            std::cout << *it << " "; // 只读访问
+        }
+    ```
+  
+  - 
+  
 - 如何获得地址
 
   - ```cpp
