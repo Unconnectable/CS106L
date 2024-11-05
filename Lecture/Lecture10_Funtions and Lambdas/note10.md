@@ -1,8 +1,14 @@
-# Template_Functions
+>
+>
+>Predicate Function:(谓词函数)是指返回布尔值(`true` 或 `false`)的函数
+>
+>Unary:一元运算
+>
+>Binary:二元
 
+# ***Template_Functions***
 
-
-## 一些函数用法
+## ***一些函数用法***
 
 - ```cpp
   //lambda函数
@@ -115,11 +121,40 @@
 
   - 
 
+# 以下是正文
+
+**Functions and Lambdas**
+
+- How can we represent functions as variables in C++?
+  - 我们如何在 C++ 中将函数表示为变量？
+
+**Algorithms**
+
+- Revisiting an old algorithm you may have seen before in modern C++
+  - 在现代 C++ 中重新审视你可能以前见过的旧算法
+
+**Ranges and Views**
+
+- A brand new (C++26), functional approach to C++ algorithms
+  - 一种全新的（C++26）函数式方法来处理 C++ 算法
 
 
 
+## ***Functions and Lambdas***
 
-***Implicit Interface***
+- 把谓词函数当成参数传入模板
 
+- ```cpp
+  template <typename It, typename Pred>
+  It find(It first, It last, Pred pred)
+  {
+      for (auto it = first; it != last; ++it)
+      {
+          if (pred(*it))
+              return it;
+      }
+      return last;
+  }
+  ```
 
-
+- 

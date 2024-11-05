@@ -1,31 +1,17 @@
-#include <iostream>
-#include <set>
-template <class T, class Y>
-auto min_(const T &a, const Y &b)
+#include <cstdio>
+
+template <typename It, typename Pred>
+It find(It first, It last, Pred pred)
 {
-    return a < b ? a : b;
-}
-template <class T, class Y>
-auto find(const T &begin, const T &end, const Y &pattern)
-{
-    for (auto _it = begin; _it != end; ++_it)
+    for (auto it = first; it != last; ++it)
     {
-        if (*_it == pattern)
-            return _it;
+        if (pred(*it))
+            return it;
     }
-    return end;
+    return last;
 }
 int main()
 {
-    std::cout << min_(555, 'a') << std::endl;
-    std::set<std::string> v{"aaa", "bbb"};
-    auto it = find(v.begin(), v.end(), "bbb");
-    int a = 93;
-    int *ptr = &a;
-    printf("a is %d \n *(int *a) is %d\n", a, *ptr);
-    if (it != v.end())
-        std::cout << "Found: " << *it << std::endl;
-    else
-        std::cout << "Not found." << std::endl;
+
     return 0;
 }

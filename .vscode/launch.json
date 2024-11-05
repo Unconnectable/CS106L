@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/code/Courses/CS106L fall 24/cs106l-assignments/assign1",
-      "program": "d:/code/Courses/CS106L fall 24/cs106l-assignments/assign1/build/Debug/outDebug",
+      "cwd": ".",
+      "program": "build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

@@ -1,23 +1,3 @@
-# Lecture10:Functions and Lambdas
-
-## **Content:**
-
-- Template Functions
-- Concepts
-- Variadic Templates(可变参数模板)
-- 模板元编程Template MetaProgramming
-
-
-
-## Template Functions:
-
-
-
-explicit instantiation:显式实例化
-
-Implicit instantiation:隐式实例化
-
-```cpp
 #include <iostream>
 #include <set>
 template <class T, class Y>
@@ -35,16 +15,30 @@ auto find(const T &begin, const T &end, const Y &pattern)
     }
     return end;
 }
+struct node
+{
+    std::string a, b;
+};
+struct StanfordID; // How do we compare two IDs?
 int main()
 {
     std::cout << min_(555, 'a') << std::endl;
+    std::cout << min_<int>(1, 2) << std::endl;
     std::set<std::string> v{"aaa", "bbb"};
     auto it = find(v.begin(), v.end(), "bbb");
+    int a = 93;
+    int *ptr = &a;
+    printf("a is %d \n *(int *a) is %d\n", a, *ptr);
     if (it != v.end())
         std::cout << "Found: " << *it << std::endl;
     else
         std::cout << "Not found." << std::endl;
+
+    node A = {"ALice", "BOB"};
+    node B = {"DDD", "CCC"};
+    StanfordID jacob{"Jacob", "jtrb"};
+    StanfordID fabio{"Fabio", "fabioi"};
+    min<StanfordID>(jacob, fabio);
+    // std::cout<<min_
     return 0;
 }
-```
-
