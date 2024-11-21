@@ -115,7 +115,30 @@ public:
   }
   ```
 
+- 在类外定义 `friend` 函数，会报错
+
 - 
+
+  ```cpp
+  
+  class StudentID
+  {
+  private:
+      string name;
+      string sunet;
+      int idNumber;
+  
+  public:
+      StudentID(string name, string sunet, int idNumber);
+  };
+  
+  // 在类外定义 friend 函数，会报错
+  friend bool operator<(const StudentID &lhs, const StudentID &rhs)
+  { 
+      // 编译错误
+      return lhs.idNumber < rhs.idNumber;
+  }
+  ```
 
 
 

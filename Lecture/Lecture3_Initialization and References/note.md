@@ -4,9 +4,9 @@
 
 ## Initialization
 
-1. Direct initialization 直接初始化 =
-2.  Uniform initialization 统一初始化 {}
-3. Structured Binding 结构化绑定
+1. `Direct initialization` 直接初始化 =
+2.  `Uniform initialization` 统一初始化 {}
+3. `Structured Binding` 结构化绑定
 
 ```cpp
 #include <iostream>
@@ -75,7 +75,7 @@ int main() {
 
  - 右值是**不具有持久存储位置**的值，通常是个常数或者临时对象
 
- - 一个小小的问题：这里的int& num是什么?
+ - 一个小小的问题：这里的`int& num`是什么?
 
  - ```cpp
    int squareN(int& num) {
@@ -100,7 +100,7 @@ int main() {
    }
    ```
 
- - 但是c++11可以通过使用&&来对右值引用
+ - 但是c++11可以通过使用`&&`来对右值引用
 
  - ```cpp
    int squareN(int& num) {
@@ -119,7 +119,7 @@ int main() {
    }
    ```
 
- - 还可以使用***const int& num***
+ - 还可以使用`const int& num`
 
  - ```cpp
    int squareN(const int& num) {  
