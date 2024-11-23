@@ -59,7 +59,7 @@ int main() {
    }
    ```
 
- - 使用auto捕获需要加上& ，否则仅仅是创建了一个副本，而不是对元素进行引用
+ - 使用`auto`捕获需要加上`&` ，否则仅仅是创建了一个副本，而不是对元素进行引用
 
  - ```cpp
    void shift( vector< pair<int, int> > &nums) {
