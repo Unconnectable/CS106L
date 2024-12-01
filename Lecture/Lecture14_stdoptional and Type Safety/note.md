@@ -52,7 +52,23 @@ valueType &vector<valueType>::back()
 }// 保证了地址存在
 ```
 
+考虑`std::pair`的写法
 
+```cpp
+std::pair<bool, valueType &> vector<valueType>::back()
+{
+    if (empty())
+    {
+        return {false, valueType()};
+    }
+    return {true, *(begin() + size() - 1)};
+}
+```
+
+可能存在的问题:
+
+- `valueType()`的构造函数不存在
+- 调用构造函数的花费太大
 
 ## std::optional
 
