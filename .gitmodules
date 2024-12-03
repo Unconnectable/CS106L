@@ -1,0 +1,3 @@
+[submodule "cs106l-assignments"]
+	path = cs106l-assignments
+	url = https://github.com/cs106l/cs106l-assignments.git
