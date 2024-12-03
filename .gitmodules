@@ -1,6 +1,0 @@
-[submodule "cs106l-assignments"]
-	path = cs106l-assignments
-	url = https://github.com/cs106l/cs106l-assignments.git
-[submodule "cs106l-lecture-code"]
-	path = cs106l-lecture-code
-	url = https://github.com/cs106l/cs106l-lecture-code.git
