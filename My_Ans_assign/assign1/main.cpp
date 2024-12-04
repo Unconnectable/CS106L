@@ -25,9 +25,9 @@ const std::string COURSES_NOT_OFFERED_PATH = "student_output/courses_not_offered
  * Hint: Remember what types C++ streams work with?!
  */
 struct Course {
-  std::string title;
-  std::string number_of_units;
-  std::string quarter;
+  /* STUDENT TODO */ title;
+  /* STUDENT TODO */ number_of_units;
+  /* STUDENT TODO */ quarter;
 };
 
 /**
@@ -58,25 +58,8 @@ struct Course {
  * @param filename The name of the file to parse.
  * @param courses  A vector of courses to populate.
  */
-void parse_csv(std::string filename, std::vector<Course>& courses) {
-  std::ifstream ifs(filename);
-  if(ifs.is_open()){
-    std::string line;
-    int cnt = 0;
-    while(std::getline(ifs,line)){
-      std::vector<std::string>fields = split(line,',');
-      if(!fields.empty()){
-        courses.emplace_back(
-          fields[0],
-          fields[1],
-          fields[2]
-          );
-      }
-      else{
-        std::cerr<<"FAIL"<<filename<<std::endl;
-      }
-    }
-  }
+void parse_csv(std::string filename, std::vector<Course> courses) {
+  /* (STUDENT TODO) Your code goes here... */
 }
 
 /**
@@ -97,29 +80,9 @@ void parse_csv(std::string filename, std::vector<Course>& courses) {
  * @param all_courses A vector of all courses gotten by calling `parse_csv`.
  *                    This vector will be modified by removing all offered courses.
  */
-
-
-void write_courses_offered(std::vector<Course>& all_courses) {
+void write_courses_offered(std::vector<Course> all_courses) {
   /* (STUDENT TODO) Your code goes here... */
-  
-  std::string filename = "student_output/courses_offered.csv";
-  std::ofstream ofs(filename);
-  int cnt = 0;
-  if(ofs.is_open()){
-    for(Course& course_ : all_courses){
-      if(course_.quarter != "null"){
-        ofs << course_.title << ","
-            << course_.number_of_units << ","
-            << course_.quarter << "\n";
-      }
-    }
-    ofs.close();
-  }
-  else{
-    std::cerr<<"FAIL"<<filename<<std::endl;
-  }
 }
-
 
 /**
  * This function writes the courses NOT offered to the file
@@ -136,51 +99,7 @@ void write_courses_offered(std::vector<Course>& all_courses) {
  */
 void write_courses_not_offered(std::vector<Course> unlisted_courses) {
   /* (STUDENT TODO) Your code goes here... */
-
-  std::string filename = "student_output/courses_not_offered.csv";
-  std::ofstream ofs(filename);
-  if(ofs.is_open()){
-    ofs << "Title,Number of Units,Quarter\n";
-    for(Course & course_ : unlisted_courses){
-      if(course_.quarter == "null"){
-        ofs << course_.title << ","
-            << course_.number_of_units << ","
-            << course_.quarter <<"\n";
-      }
-    }
-    ofs.close();
-  }
-  else{
-    std::cerr<<"FAIL"<<filename<<std::endl;
-  }
 }
-
-/*
-    another answer is to use itrator like blow,just pop those quarter are not null
-    and the not_offered is just write all the courses into CSV
-    That's OK
-    
-    
-    Here is offered's framework,little difference to above!
-    for(auto it = all_courses.begin() ; it!=all_courses.end() ; ){
-      if(it ->quarter != "null"){
-        ofs << it->title << ","
-            << it->number_of_units << ","
-            << it->quarter << "\n";
-        it = all_courses.erase(it);
-      }
-      else{
-        ++it;
-      }
-    Here is not_offered 's framework,just the same as offered I use above!!!!
-    
-    ofs << "Title,Number of Units,Quarter\n";
-    for(const Course & course_ : all_courses){
-      ofs << course_.title << ","
-          << course_.number_of_units << ","
-          << course_.quarter << "\n";
-    }
-*/
 
 int main() {
   /* Makes sure you defined your Course struct correctly! */
@@ -188,10 +107,9 @@ int main() {
 
   std::vector<Course> courses;
   parse_csv("courses.csv", courses);
-  std::vector<Course>courses_copy = courses;
 
   /* Uncomment for debugging... */
-  //print_courses(courses);
+  // print_courses(courses);
 
   write_courses_offered(courses);
   write_courses_not_offered(courses);

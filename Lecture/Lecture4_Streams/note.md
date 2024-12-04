@@ -2,9 +2,7 @@
 
 ## 2.What are streams
 
-- iostream是istream和ostream的交集
-
-
+- `iostream`是`istream`和`ostream`的交集
 
 ## 3.stringstream
 
@@ -42,9 +40,7 @@
   }
   ```
 
-- 
-
-- ```shell
+- ```cpp
   istream& getline(istream& is, string& str, char delim)
   ● getline() 从输入流 is 中读取内容，直到遇到分隔符字符 delim，并将其存储在缓冲区 str 中。
   ● 默认的分隔符字符是 ‘\n’（换行符）。
