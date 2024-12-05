@@ -28,6 +28,11 @@ def norm_path(path: os.PathLike) -> os.PathLike:
 
 def install_castxml():
     bin_path = os.environ.get("VIRTUAL_ENV_BIN")
+
+    # 如果没有设置 bin_path，使用默认路径或者报错
+    if bin_path is None:
+        raise RuntimeError("VIRTUAL_ENV_BIN is not set. Please ensure the environment is correctly configured.")
+    
     castxml_dir = os.path.join(bin_path, "castxml")
 
     castxml_bin_dir = os.path.join(castxml_dir, "bin")
@@ -35,6 +40,7 @@ def install_castxml():
         [castxml_bin_dir, *os.environ.get("PATH", "").split(os.pathsep)]
     )
 
+    # 如果已经存在 castxml 目录，则直接返回
     if os.path.isdir(castxml_dir):
         return
 
@@ -73,12 +79,14 @@ def install_castxml():
 
     castxml_archive_path = os.path.join(bin_path, castxml_file)
 
+    # 下载文件
     with requests.get(castxml_download_url, stream=True) as r:
         r.raise_for_status()
         with open(castxml_archive_path, "wb") as f:
             for chunk in r.iter_content(chunk_size=8192):
                 f.write(chunk)
 
+    # 解压下载的文件
     if castxml_file.endswith(".zip"):
         with zipfile.ZipFile(castxml_archive_path, "r") as zip_ref:
             zip_ref.extractall(bin_path)
@@ -87,7 +95,6 @@ def install_castxml():
             tar_ref.extractall(bin_path)
 
     print("✅ Installed CastXML!")
-
 
 def get_definitions(source_file: os.PathLike) -> Set[Tuple[str, str]]:
     if not os.path.exists(source_file):
