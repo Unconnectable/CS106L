@@ -16,6 +16,68 @@ public:
 };
 ```
 
+### 一个后来补充的每一个函数的具体实现
+
+```cpp
+class Widget {
+public:
+    std::string name;    
+    // 默认构造函数
+    Widget() {
+        name = "Default Widget";
+        std::cout << "Default Constructor: " << name << std::endl;
+    }
+    // 拷贝构造函数
+    Widget(const Widget& w) {
+        name = w.name;
+        std::cout << "Copy Constructor: " << name << std::endl;
+    }
+    // 拷贝赋值运算符
+    Widget& operator=(const Widget& w) {
+        if (this != &w) {  // 防止自赋值
+            name = w.name;
+        }
+        std::cout << "Copy Assignment Operator: " << name << std::endl;
+        return *this;
+    }
+    // 移动构造函数
+    Widget(Widget&& rhs) noexcept {
+        name = std::move(rhs.name);  // 使用 std::move 转移资源
+        std::cout << "Move Constructor: " << name << std::endl;
+    }
+    // 移动赋值运算符
+    Widget& operator=(Widget&& rhs) noexcept {
+        if (this != &rhs) {
+            name = std::move(rhs.name);  // 使用 std::move 转移资源
+        }
+        std::cout << "Move Assignment Operator: " << name << std::endl;
+        return *this;
+    }
+};
+int main() {
+    // 1. 默认构造函数
+    Widget w1;  // 调用默认构造函数
+  
+    // 2. 拷贝构造函数
+    Widget w2 = w1;  // 调用拷贝构造函数
+
+    // 3. 拷贝赋值运算符
+    Widget w3;
+    w3 = w1;  // 调用拷贝赋值运算符
+
+    // 4. 移动构造函数
+    Widget w4 = std::move(w1);  // 调用移动构造函数
+    
+    // 5. 移动赋值运算符
+    Widget w5;
+    w5 = std::move(w2);  // 调用移动赋值运算符
+
+    return 0;
+}
+```
+
+
+
 ## ○An overview 
 
 | 功能           | 函数                     |
@@ -105,6 +167,18 @@ public:
 
 ## ○default and delete 
 
+```cpp
+//禁用某些特殊成员函数的功能
+class Widget {
+public:
+    Widget();                           		// 默认构造函数
+    Widget(const Widget& w);            		// 拷贝构造函数
+    Widget& operator=(const Widget& w); 		// 拷贝赋值运算符
+    Widget(Widget&& rhs) = delete;      		// 移动构造函数
+    Widget& operator=(Widget&& rhs)= delete;    // 移动赋值运算符
+};	
+```
+
 
 
 ### 我们可以有选择地启用特殊成员函数的功能！
@@ -175,4 +249,3 @@ public:
 ## ○Move and move assignment
 
 `Copy Constructor` 和`Copy Assign Constructor` 会复制每一个元素 有的时候会造成很多不必要的浪费 于是`Move Constructor`和`Move Assign Constructor`出现了
-

@@ -63,9 +63,9 @@ std::vector<Forecast> get_shuffled_data(const std::vector<Forecast>& forecastDat
 std::vector<Forecast> run_weather_pipeline(const std::vector<std::vector<double>>& weatherData) {
   // STUDENT TODO 5: Put your functions together to run the weather pipeline!
   std::vector<Forecast> forecastData = get_forecasts(weatherData);
-  forecastData = get_filtered_data(forecastData);
-  forecastData = get_shuffled_data(forecastData);
-  return forecastData;
+  std::vector<Forecast> forecastData_1 = get_filtered_data(forecastData);
+  std::vector<Forecast> forecastData_2 = get_shuffled_data(forecastData);
+  return forecastData_2;
 }
 
 /* #### Please don't change this line! #### */
