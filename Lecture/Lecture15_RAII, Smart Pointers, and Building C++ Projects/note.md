@@ -166,9 +166,28 @@ std::unique_ptr<T> sharedPtr = std::make_shared<T>();
 std::weak_ptr<T> wp = sharedPtr;
 ```
 
+## ***讲讲相比起`new T` ，使用`std::make_unique`和`std::make_shared`的好处***
+
+```cpp
+struct Example {
+    Example(int x) {
+        if (x < 0) throw std::runtime_error("Invalid value");
+    }
+};
+
+std::unique_ptr<Example> ptr(new Example(-1)); // 构造函数抛出异常
+//对于这段代码  会抛出runtime_error的异常
+//使用new的话 会出现分配了内存 但是因为出现了异常 动态内存块会变成未绑定的孤立状态
+//此时的ptr 没有被绑定到内存 动态分配的内存无人管理 造成内存泄漏(memory leak)
+
+std::unique_ptr<Example> ptr = std::make_unique<Example>(-1);
+//std::make_unique 执行对象分配和 std::unique_ptr 的绑定操作。
+//相比之下 智能指针 std::make_unique 在检查到异常的时候，分配失败的内存会自动回收
+```
 
 
-为什么使用`std::unique_ptr 和std::unique_ptr<T>`:
+
+为什么使用`std::unique_ptr 和std::unique_ptr<T>`s
 
 ### **避免内存分配两次**
 
@@ -305,3 +324,20 @@ clean:
 
 
 ![C++Iceberg](D:\code\Courses\CS106L fall 24\Lecture\Lecture15_RAII, Smart Pointers, and Building C++ Projects\C++Iceberg.png)
+
+```cpp
+const T& operator*() const{}
+const T& operator*() {}
+T& operator*() const {}
+这三者的区别
+```
+
+### 区别：
+
+| **特性**                            | **`const T& operator\*() const`**                    | **`const T& operator\*()`**                              | **`T& operator\*() const`**                             |
+| ----------------------------------- | ---------------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------- |
+| **返回类型**                        | `const T&`（常量引用）                               | `const T&`（常量引用）                                   | `T&`（非常量引用）                                      |
+| **成员函数是否是 `const` 成员函数** | 是 (`const`)                                         | 否                                                       | 是 (`const`)                                            |
+| **能否修改解引用的值**              | 不可以                                               | 不可以                                                   | 可以                                                    |
+| **适用对象类型**                    | 适用于 `const` 对象                                  | 适用于 `const` 和非 `const` 对象                         | 只能用于 `const` 对象，不能修改其成员                   |
+| **典型用途**                        | 用于读取对象的值，不修改它，通常用于智能指针、容器等 | 用于返回不可修改的引用，适用于 `const` 和非 `const` 对象 | 非常罕见，通常用于返回引用，但不应该用在 `const` 对象上 |
